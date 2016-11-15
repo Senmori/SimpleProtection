@@ -16,10 +16,4 @@ public class ActionBar {
         PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte)2);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(ppoc);
     }
-    
-    public static void sendLockedMessage(Player player, Block block) {
-        String message = ChatColor.RED + "This " + block.getType().toString().toLowerCase().replace("_", " ") + " is locked!";
-        sendMessage(player, message);
-        player.playSound(block.getLocation(), Sound.BLOCK_CHEST_LOCKED, 1.0F, 1.0F);
-    }
 }

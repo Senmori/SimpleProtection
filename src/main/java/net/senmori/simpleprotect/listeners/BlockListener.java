@@ -50,6 +50,9 @@ public class BlockListener implements Listener {
         if(e.getBlockReplacedState().getType() == Material.AIR) {
             return;
         }
+        if(e.getBlockAgainst().getType() == Material.WALL_SIGN && ProtectionManager.isProtected(e.getBlockAgainst())) {
+            return;
+        }
         
         if(!ProtectionManager.canBuild(player, targetBlock)) {
             e.setBuild(false);

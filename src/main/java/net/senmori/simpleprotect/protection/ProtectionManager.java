@@ -42,39 +42,43 @@ public final class ProtectionManager {
     
     public static boolean isProtected(Block block) {
         if(block == null || block.getType() == Material.AIR) return false;
+        boolean protect = false;
         for(Protection prot : protections) {
             if(prot.isProtected(block)) {
-                return true;
+                protect = true;
             }
         }
-        return false;
+        return protect;
     }
     
     public static boolean canProtect(Block block) {
         if(block == null || block.getType() == Material.AIR) return false;
+        boolean protect = false;
         for(Protection prot : protections) {
             if(prot.canProtect(block)) {
-                return true;
+                protect = true;
             }
         }
-        return false;
+        return protect;
     }
     
     public static boolean canDestroy(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return true;
+        boolean protect = false;
         for(Protection prot : protections) {
             if(prot.canDestroy(player, block)) {
-                return true;
+                protect = true;
             }
         }
-        return false;
+        return protect;
     }
     
     public static boolean canBuild(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return true;
+        boolean protect = false;
         for(Protection prot : protections) {
             if(prot.canBuild(player, block)) {
-                return true;
+                protect = true;
             }
         }
         return false;
@@ -82,17 +86,18 @@ public final class ProtectionManager {
     
     public static boolean canInteract(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return true;
+        boolean protect = false;
         for(Protection prot : protections) {
             if(prot.canInteract(player, block)) {
-                return true;
+                protect = true;
             }
         }
-        return false;
+        return protect;
     }
     
     public static String getOwnerName(Block block) {
         String owner = null;
-        if(block == null || block.getType() == Material.AIR) return owner;
+        if(block == null || block.getType() == Material.AIR) return null;
         for(Protection prot : protections) {
             if( (owner = prot.getOwner(block)) != null) {
                 return owner;
@@ -117,7 +122,7 @@ public final class ProtectionManager {
     public static boolean isProtectionSign(Sign sign) {
         if(sign.getType() != Material.WALL_SIGN) return false;
         
-        return (ChatColor.stripColor(sign.getLine(0)).equalsIgnoreCase(PRIVATE_KEY));
+        return sign.getLine(0).equalsIgnoreCase(PRIVATE_KEY);
     }
     
     public static boolean isExtraUserSign(Sign sign) {
@@ -126,6 +131,6 @@ public final class ProtectionManager {
         if(sign.getLine(2).equalsIgnoreCase(EVERYONE_KEY) || sign.getLine(3).equalsIgnoreCase(EVERYONE_KEY)) {
             return true;
         }
-        return ChatColor.stripColor(sign.getLine(0)).equalsIgnoreCase(MORE_USERS_KEY);
+        return sign.getLine(0).equalsIgnoreCase(MORE_USERS_KEY);
     }
 }

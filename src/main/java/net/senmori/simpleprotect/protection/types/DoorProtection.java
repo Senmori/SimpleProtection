@@ -6,10 +6,7 @@ import java.util.List;
 import net.senmori.simpleprotect.ProtectionConfig;
 import net.senmori.simpleprotect.protection.Protection;
 import net.senmori.simpleprotect.protection.ProtectionManager;
-import net.senmori.simpleprotect.util.BlockCache;
-import net.senmori.simpleprotect.util.LogHandler;
 import net.senmori.simpleprotect.util.Reference;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -56,12 +53,6 @@ public class DoorProtection extends Protection {
     }
     
     public boolean isProtected(Block block) {
-        if(BlockCache.isLocked(block)) {
-            if(getOwnerSign(block) == null) {
-                BlockCache.resetCache(block);
-                return false;
-            }
-        }
         return getOwnerSign(block) != null;
     }
     
@@ -229,7 +220,8 @@ public class DoorProtection extends Protection {
         if(isTrapDoor(block.getType())) {
             // block is a trap door, check it and the block it is against for signs
             TrapDoor trap = (TrapDoor)block.getState().getData();
-            if(block.getRelative(trap.getAttachedFace()) != null && block.getRelative(trap.getAttachedFace()).getType() != Material.AIR) {
+            if( block.getRelative(trap.getAttachedFace()) != null && block.getRelative(trap.getAttachedFace()).getType() != Material.AIR
+                && !ProtectionManager.blacklistedMaterials.contains(block.getRelative(trap.getAttachedFace()).getType()) ) {
                 Block against = block.getRelative(trap.getAttachedFace());
                 signs.addAll(scanForSigns(against));
             }
@@ -320,14 +312,12 @@ public class DoorProtection extends Protection {
             Sign sign = (Sign)block.getState();
             org.bukkit.material.Sign mat = (org.bukkit.material.Sign)sign.getData();
             if(ProtectionManager.isProtectionSign(sign) || ProtectionManager.isExtraUserSign(sign)) {
-                BlockCache.setCache(sign.getBlock());
                 signs.add(sign);
             }
             // check the block the sign is attached to for signs
             block = block.getRelative(mat.getAttachedFace());
             if(ProtectionManager.blacklistedMaterials.contains(block.getType())) {
                 signs.clear(); // clear sign -> not allowed to be placed on this material
-                BlockCache.resetCache(block);
                 return signs; // ignore signs attached to blacklisted materials
             }
         }
@@ -336,13 +326,9 @@ public class DoorProtection extends Protection {
             if(block.getRelative(face).getType() == Material.WALL_SIGN) {
                 Sign sign = (Sign)block.getRelative(face).getState();
                 if(ProtectionManager.isProtectionSign(sign) || ProtectionManager.isExtraUserSign(sign)) {
-                    BlockCache.setCache(sign.getBlock());
                     signs.add(sign);
                 }
             }
-        }
-        if(signs.size() > 0){
-            BlockCache.setCache(block);
         }
         return signs;
     }

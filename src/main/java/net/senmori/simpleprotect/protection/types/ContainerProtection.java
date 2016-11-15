@@ -6,8 +6,6 @@ import java.util.List;
 import net.senmori.simpleprotect.ProtectionConfig;
 import net.senmori.simpleprotect.protection.Protection;
 import net.senmori.simpleprotect.protection.ProtectionManager;
-import net.senmori.simpleprotect.util.BlockCache;
-import net.senmori.simpleprotect.util.LogHandler;
 import net.senmori.simpleprotect.util.Reference;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -51,13 +49,6 @@ public class ContainerProtection extends Protection {
     }
     
     public boolean isProtected(Block block) {
-        if(BlockCache.isLocked(block)) {
-            if(getOwnerSign(block) == null) {
-                BlockCache.resetCache(block);
-                return false;
-            }
-            return true;
-        }
         return getOwnerSign(block) != null;
     }
     
@@ -85,7 +76,8 @@ public class ContainerProtection extends Protection {
                 return true;
             }
         }
-        return isOwner(player, block);
+        String owner = getOwner(block);
+        return owner != null && owner.equals(player.getName());
     }
     
     public boolean canBuild(Player player, Block block) {
@@ -99,7 +91,8 @@ public class ContainerProtection extends Protection {
                 return true;
             }
         }
-        return isOwner(player, block);
+        String owner = getOwner(block);
+        return owner != null && owner.equals(player.getName());
     }
     
     
@@ -120,14 +113,14 @@ public class ContainerProtection extends Protection {
     public String getOwner(Block block) {
         Sign sign = getOwnerSign(block);
         if(sign != null) {
-            return ChatColor.stripColor(sign.getLine(1));
+            return sign.getLine(1);
         }
         return null;
     }
     
     private boolean isOwner(Player player, Block block) {
         Sign sign = getOwnerSign(block);
-        return sign != null && ChatColor.stripColor(sign.getLine(1)).equals(player.getName());
+        return sign != null && sign.getLine(1).equals(player.getName());
     }
     
     private boolean isUser(Player player, Block block) {
@@ -137,12 +130,10 @@ public class ContainerProtection extends Protection {
         if(users != null && users.size() > 0) {
             for(Sign sign : users) {
                 for(String line : sign.getLines()) {
-                    String str = ChatColor.stripColor(line);
-                    LogHandler.debug("Looking for user: " + str);
-                    if(str.equalsIgnoreCase(ProtectionManager.EVERYONE_KEY)) {
+                    if(!line.isEmpty() && line.equals(ProtectionManager.EVERYONE_KEY)) {
                         return true;
                     }
-                    if(str.equalsIgnoreCase(player.getName())) {
+                    if(!line.isEmpty() && line.equals(player.getName())) {
                         return true;
                     }
                 }
@@ -204,7 +195,6 @@ public class ContainerProtection extends Protection {
             Sign sign = (Sign)block.getState();
             org.bukkit.material.Sign mat = (org.bukkit.material.Sign)sign.getData();
             if(ProtectionManager.blacklistedMaterials.contains(block.getRelative(mat.getAttachedFace()).getType())) {
-                BlockCache.resetCache(block); // reset cache to be safe
                 return signs; // ignore signs attached to blacklisted materials
             }
             // check the block it's attached to for signs
@@ -240,14 +230,12 @@ public class ContainerProtection extends Protection {
             Sign sign = (Sign)block.getState();
             org.bukkit.material.Sign mat = (org.bukkit.material.Sign)sign.getData();
             if(ProtectionManager.isProtectionSign(sign) || ProtectionManager.isExtraUserSign(sign)) {
-                BlockCache.setCache(sign.getBlock());
                 signs.add(sign);
             }
             // check the block the sign is attached to for signs
             block = block.getRelative(mat.getAttachedFace());
             if(ProtectionManager.blacklistedMaterials.contains(block.getType())) {
                 signs.clear(); // clear signs -> not allowed to be placed on this material
-                BlockCache.resetCache(block);
                 return signs;
             }
             
@@ -256,15 +244,9 @@ public class ContainerProtection extends Protection {
             if(block.getRelative(face).getType() == Material.WALL_SIGN) {
                 Sign sign = (Sign)block.getRelative(face).getState();
                 if(ProtectionManager.isProtectionSign(sign) || ProtectionManager.isExtraUserSign(sign)) {
-                    BlockCache.setCache(sign.getBlock());
                     signs.add(sign);
                 }
             }
-        }
-        if(signs.size() > 0) {
-            BlockCache.setCache(block); // if it found protection signs, set the cache for this block
-        } else {
-            BlockCache.resetCache(block);
         }
         return signs;
     }

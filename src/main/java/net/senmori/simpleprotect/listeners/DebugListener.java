@@ -33,7 +33,6 @@ public class DebugListener implements Listener {
             p.sendMessage(ChatColor.GOLD + "CanDestroy: " + ChatColor.RESET + formatBool(ProtectionManager.canDestroy(p, b)));
             p.sendMessage(ChatColor.GOLD + "CanBuild: " + ChatColor.RESET + formatBool(ProtectionManager.canBuild(p, b)));
             p.sendMessage(ChatColor.GOLD + "CanInteract: " + ChatColor.RESET + formatBool(ProtectionManager.canInteract(p, b)));
-            
             if(b.getType() == Material.WALL_SIGN) {
                 Sign signBlock = (Sign)b.getState();
                 org.bukkit.material.Sign mat = (org.bukkit.material.Sign)signBlock.getData();

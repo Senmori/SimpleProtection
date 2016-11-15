@@ -23,8 +23,6 @@ public class InventoryListener implements Listener {
     
     @EventHandler
     public void onMove(InventoryMoveItemEvent e) {
-        Bukkit.broadcastMessage("SOURCE: " + e.getSource().getType().toString());
-        Bukkit.broadcastMessage("DEST: " + e.getDestination().getType().toString());
         boolean sourceLocked = isInventoryLocked(e.getSource());
         boolean destLocked = isInventoryLocked(e.getDestination());
         if(sourceLocked) {
