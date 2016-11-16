@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2cd83cf3-a37c-49a9-b278-a20f83751679" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/BlockCache.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_1_10_2_R0_1_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_1_10_2_R0_1_SNAPSHOT.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/BlockListener.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/BlockListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/ProtectionConfig.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/ProtectionConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/SimpleProtection.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/SimpleProtection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/DebugListener.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/DebugListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/InventoryListener.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/InventoryListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/ProtectionManager.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/ProtectionManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/ContainerProtection.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/ContainerProtection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/DoorProtection.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/DoorProtection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/ActionBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/ActionBar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config.yml" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" />
     </list>
     <ignored path="SimpleProtection.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,8 +36,8 @@
       <file leaf-file-name="DoorProtection.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/DoorProtection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="95" column="38" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
+            <state relative-caret-position="268">
+              <caret line="76" column="49" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,21 +48,8 @@
       <file leaf-file-name="ContainerProtection.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/ContainerProtection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="157" column="9" selection-start-line="157" selection-start-column="9" selection-end-line="157" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;method#getOwnerSign#0;class#ContainerProtection#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DebugListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/DebugListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state relative-caret-position="-1">
+              <caret line="166" column="51" selection-start-line="166" selection-start-column="51" selection-end-line="166" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -72,13 +60,22 @@
       <file leaf-file-name="ProtectionManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/ProtectionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="124" column="35" selection-start-line="124" selection-start-column="35" selection-end-line="124" selection-end-column="35" />
+            <state relative-caret-position="160">
+              <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#ProtectionManager#0" expanded="true" />
-                <element signature="e#1166#1176#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleProtection.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/SimpleProtection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211">
+              <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,28 +112,28 @@
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protect/ProtectionManager.java" />
         <option value="$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.10.2-R0.1-SNAPSHOT/spigot-1.10.2-R0.1-SNAPSHOT.jar!/org/bukkit/material/TrapDoor.class" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/Reference.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
-        <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/tasks/ToggleDoorTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/Protection.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/ContainerProtection.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/DoorProtection.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/SimpleProtection.java" />
         <option value="$PROJECT_DIR$/build.sh" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/FileUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/BlockCache.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/SignListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/ProtectionConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/PlayerListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/LogHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/InventoryListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/BlockListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/DoorProtection.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/DebugListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/ActionBar.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/ContainerProtection.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/SimpleProtection.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/ProtectionConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/DebugListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/DoorProtection.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/ProtectionManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/ContainerProtection.java" />
       </list>
     </option>
   </component>
@@ -184,6 +181,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -328,9 +326,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleProtection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SimpleProtection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simpleprotect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="listeners" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -338,6 +365,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../DevServer/spigot.jar" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15429688" />
+    <property name="project.structure.side.proportion" value="0.20236337" />
   </component>
   <component name="RunManager" selected="JAR Application.Start Spigot">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -685,7 +715,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -754,13 +784,52 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/DoorProtection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="95" column="38" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/ContainerProtection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2312">
+          <caret line="166" column="7" selection-start-line="166" selection-start-column="7" selection-end-line="166" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/DebugListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/ProtectionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1870">
+          <caret line="124" column="35" selection-start-line="124" selection-start-column="35" selection-end-line="124" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#ProtectionManager#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/BlockListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -768,9 +837,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -788,10 +855,6 @@
           <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="171" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;class#DoorProtection#0" expanded="false" />
-            <element signature="docComment;method#getProtectedMaterials#0;class#DoorProtection#0" expanded="false" />
-            <element signature="docComment;method#getOwnerSign#0;class#DoorProtection#0" expanded="false" />
-            <element signature="docComment;method#getUserSigns#0;class#DoorProtection#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -802,10 +865,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;class#ContainerProtection#0" expanded="false" />
-            <element signature="docComment;method#getProtectedMaterials#0;class#ContainerProtection#0" expanded="false" />
-            <element signature="docComment;method#getOwnerSign#0;class#ContainerProtection#0" expanded="true" />
-            <element signature="docComment;method#getUserSigns#0;class#ContainerProtection#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -825,9 +884,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -846,9 +903,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -863,9 +918,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -873,7 +926,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="46" column="57" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -883,10 +938,6 @@
           <caret line="220" column="41" selection-start-line="220" selection-start-column="41" selection-end-line="220" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;class#DoorProtection#0" expanded="false" />
-            <element signature="docComment;method#getProtectedMaterials#0;class#DoorProtection#0" expanded="false" />
-            <element signature="docComment;method#getOwnerSign#0;class#DoorProtection#0" expanded="false" />
-            <element signature="docComment;method#getUserSigns#0;class#DoorProtection#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -908,10 +959,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;class#ContainerProtection#0" expanded="false" />
-            <element signature="docComment;method#getProtectedMaterials#0;class#ContainerProtection#0" expanded="false" />
-            <element signature="docComment;method#getOwnerSign#0;class#ContainerProtection#0" expanded="true" />
-            <element signature="docComment;method#getUserSigns#0;class#ContainerProtection#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -933,10 +980,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;class#ContainerProtection#0" expanded="false" />
-            <element signature="docComment;method#getProtectedMaterials#0;class#ContainerProtection#0" expanded="false" />
-            <element signature="docComment;method#getOwnerSign#0;class#ContainerProtection#0" expanded="true" />
-            <element signature="docComment;method#getUserSigns#0;class#ContainerProtection#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -948,27 +991,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.10.2-R0.1-SNAPSHOT/spigot-1.10.2-R0.1-SNAPSHOT.jar!/org/bukkit/entity/minecart/HopperMinecart.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -976,40 +1002,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="74" selection-start-line="2" selection-start-column="74" selection-end-line="2" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/BlockCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/Protection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#Protection#0" expanded="true" />
-            <element signature="docComment;method#isProtected#0;class#Protection#0" expanded="true" />
-            <element signature="docComment;method#canProtect#0;class#Protection#0" expanded="true" />
-            <element signature="docComment;method#canBuild#0;class#Protection#0" expanded="true" />
-            <element signature="docComment;method#canDestroy#0;class#Protection#0" expanded="true" />
-            <element signature="docComment;method#canInteract#0;class#Protection#0" expanded="true" />
-            <element signature="docComment;method#getOwner#0;class#Protection#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/util/BlockCache.java" />
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,22 +1017,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="71" selection-start-line="12" selection-start-column="71" selection-end-line="12" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/BlockListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/InventoryListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
           <folding />
         </state>
       </provider>
@@ -1059,7 +1043,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1067,7 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1091,68 +1073,198 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/BlockListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/InventoryListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/ProtectionConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-333">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        <state relative-caret-position="408">
+          <caret line="46" column="89" selection-start-line="46" selection-start-column="89" selection-end-line="46" selection-end-column="89" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/SimpleProtection.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/DebugListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
+        <state relative-caret-position="153">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/DoorProtection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="95" column="38" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
+        <state relative-caret-position="268">
+          <caret line="76" column="49" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/SimpleProtection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/Protection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Protection#0" expanded="true" />
+            <element signature="docComment;method#isProtected#0;class#Protection#0" expanded="true" />
+            <element signature="docComment;method#canProtect#0;class#Protection#0" expanded="true" />
+            <element signature="docComment;method#canBuild#0;class#Protection#0" expanded="true" />
+            <element signature="docComment;method#canDestroy#0;class#Protection#0" expanded="true" />
+            <element signature="docComment;method#canInteract#0;class#Protection#0" expanded="true" />
+            <element signature="docComment;method#getOwner#0;class#Protection#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/ProtectionManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="124" column="35" selection-start-line="124" selection-start-column="35" selection-end-line="124" selection-end-column="35" />
+        <state relative-caret-position="160">
+          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#ProtectionManager#0" expanded="true" />
-            <element signature="e#1166#1176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/listeners/DebugListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/senmori/simpleprotect/protection/types/ContainerProtection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="157" column="9" selection-start-line="157" selection-start-column="9" selection-end-line="157" selection-end-column="9" />
+        <state relative-caret-position="-1">
+          <caret line="166" column="51" selection-start-line="166" selection-start-column="51" selection-end-line="166" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;method#getOwnerSign#0;class#ContainerProtection#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20236337" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20236337" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20236337" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>SimpleProtection</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20236337" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20236337" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: org.spigotmc:spigot:1.10.2-R0.1-SNAPSHOT</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20236337" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

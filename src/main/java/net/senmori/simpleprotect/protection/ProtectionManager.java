@@ -8,6 +8,7 @@ import net.senmori.simpleprotect.ProtectionConfig;
 import net.senmori.simpleprotect.SimpleProtection;
 import net.senmori.simpleprotect.protection.types.ContainerProtection;
 import net.senmori.simpleprotect.protection.types.DoorProtection;
+import net.senmori.simpleprotect.util.LogHandler;
 import net.senmori.simpleprotect.util.Reference;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -36,84 +37,52 @@ public final class ProtectionManager {
     
     public static void init(ProtectionConfig config) {
         ProtectionManager.config = config;
-        protections.add(new DoorProtection(config));
         protections.add(new ContainerProtection(config));
+        protections.add(new DoorProtection(config));
     }
     
     public static boolean isProtected(Block block) {
         if(block == null || block.getType() == Material.AIR) return false;
-        boolean protect = false;
-        for(Protection prot : protections) {
-            if(prot.isProtected(block)) {
-                protect = true;
-            }
-        }
-        return protect;
+        Protection prot = getProtection(block);
+        return prot != null && prot.isProtected(block);
     }
     
     public static boolean canProtect(Block block) {
         if(block == null || block.getType() == Material.AIR) return false;
-        boolean protect = false;
-        for(Protection prot : protections) {
-            if(prot.canProtect(block)) {
-                protect = true;
-            }
-        }
-        return protect;
+        Protection prot = getProtection(block);
+        return prot != null && prot.canProtect(block);
     }
     
     public static boolean canDestroy(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return true;
-        boolean protect = false;
-        for(Protection prot : protections) {
-            if(prot.canDestroy(player, block)) {
-                protect = true;
-            }
-        }
-        return protect;
+        Protection prot = getProtection(block);
+        return prot != null && prot.canDestroy(player, block);
     }
     
     public static boolean canBuild(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return true;
-        boolean protect = false;
-        for(Protection prot : protections) {
-            if(prot.canBuild(player, block)) {
-                protect = true;
-            }
-        }
-        return false;
+        Protection prot = getProtection(block);
+        return prot != null && prot.canBuild(player, block);
     }
     
     public static boolean canInteract(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return true;
-        boolean protect = false;
-        for(Protection prot : protections) {
-            if(prot.canInteract(player, block)) {
-                protect = true;
-            }
-        }
-        return protect;
+        Protection prot = getProtection(block);
+        return prot != null && prot.canInteract(player, block);
     }
     
     public static String getOwnerName(Block block) {
-        String owner = null;
         if(block == null || block.getType() == Material.AIR) return null;
-        for(Protection prot : protections) {
-            if( (owner = prot.getOwner(block)) != null) {
-                return owner;
-            }
+        Protection prot = getProtection(block);
+        if(prot != null) {
+            return prot.getOwner(block);
         }
-        return owner;
+        return null;
     }
     
     public static boolean canCreateProtection(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return false;
         if(!canProtect(block)) return false;
-        if(config.useLockettePerms) {
-            return player.hasPermission(Reference.Lockette.ADMIN_BYPASS) ||
-                   player.hasPermission(Reference.Lockette.USER_CREATE) ||
-                   player.hasPermission(Reference.Lockette.ADMIN_CREATE);
-        }
         return player.hasPermission(Reference.Permissions.USER_CREATE) ||
                player.hasPermission(Reference.Permissions.ADMIN_CREATE) ||
                player.hasPermission(Reference.Permissions.ADMIN_BYPASS);
@@ -132,5 +101,14 @@ public final class ProtectionManager {
             return true;
         }
         return sign.getLine(0).equalsIgnoreCase(MORE_USERS_KEY);
+    }
+    
+    private static Protection getProtection(Block block) {
+        for(Protection prot : protections) {
+            if(prot.canProtect(block)) {
+                return prot;
+            }
+        }
+        return null;
     }
 }

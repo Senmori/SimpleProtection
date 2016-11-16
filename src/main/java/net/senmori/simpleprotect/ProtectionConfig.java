@@ -10,12 +10,12 @@ public class ProtectionConfig {
     public final boolean debug = true;
     public boolean allowAdminBypass;
     public boolean allowAdminSnoop;
-    public boolean allowAdminBreak;
     public boolean useLockettePerms;
     public boolean explosionProtection;
     public boolean doorProtection;
     public boolean enableErrorMessage;
     public boolean enableHints;
+    public boolean creativeOverride;
     
     private ProtectionConfig(SimpleProtection plugin) {
         this.plugin = plugin;
@@ -39,11 +39,11 @@ public class ProtectionConfig {
     private void init() {
         this.allowAdminBypass = plugin.getConfig().getBoolean("allow-admin-bypass", true);
         this.allowAdminSnoop = plugin.getConfig().getBoolean("allow-admin-snoop", false);
-        this.allowAdminBreak = plugin.getConfig().getBoolean("allow-admin-break", true);
         this.explosionProtection = plugin.getConfig().getBoolean("explosion-protection", true);
         this.doorProtection = plugin.getConfig().getBoolean("door-protection", true);
         this.enableErrorMessage = plugin.getConfig().getBoolean("enable-error-messages", true);
         this.enableHints = plugin.getConfig().getBoolean("enable-hints", true);
         this.useLockettePerms = plugin.getConfig().getBoolean("use-lockette-perms", true);
+        this.creativeOverride = plugin.getConfig().getBoolean("creative-override", true);
     }
 }

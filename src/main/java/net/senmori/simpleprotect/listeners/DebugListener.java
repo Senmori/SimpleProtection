@@ -14,8 +14,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class DebugListener implements Listener {
     
-    
-    
     @EventHandler(priority = EventPriority.MONITOR)
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
@@ -23,10 +21,9 @@ public class DebugListener implements Listener {
         if(p.isSneaking() && e.getAction() == Action.LEFT_CLICK_BLOCK && p.getInventory().getItemInMainHand().getType() == Material.DIAMOND_SWORD) {
             e.setCancelled(true);
             
-            
             Block b = e.getClickedBlock();
             p.sendMessage(ChatColor.GREEN + "==============");
-            p.sendMessage(ChatColor.GOLD + "Block: " + ChatColor.RESET + b.getType().toString() + ChatColor.GREEN + " : " + ChatColor.RESET + b.getState().getData().getData());
+            p.sendMessage(ChatColor.GOLD + "Block: " + ChatColor.RESET + b.getType().toString() + ChatColor.GOLD + " : " + ChatColor.RESET + b.getState().getData().getData());
             p.sendMessage(ChatColor.GOLD + "Lockable: " + ChatColor.RESET + formatBool(ProtectionManager.canProtect(b)));
             p.sendMessage(ChatColor.GOLD + "Locked: " + ChatColor.RESET + formatBool(ProtectionManager.isProtected(b)));
             p.sendMessage(ChatColor.GOLD + "Owner: " + ChatColor.RESET + ProtectionManager.getOwnerName(b));
@@ -36,7 +33,7 @@ public class DebugListener implements Listener {
             if(b.getType() == Material.WALL_SIGN) {
                 Sign signBlock = (Sign)b.getState();
                 org.bukkit.material.Sign mat = (org.bukkit.material.Sign)signBlock.getData();
-                p.sendMessage(ChatColor.GOLD + "Attached Face: " + ChatColor.RESET + mat.getAttachedFace() + ChatColor.GREEN + " : " + ChatColor.RESET + b.getRelative(mat.getAttachedFace()).getType());
+                p.sendMessage(ChatColor.GOLD + "Attached Face: " + ChatColor.RESET + mat.getAttachedFace() + ChatColor.GOLD + " : " + ChatColor.RESET + b.getRelative(mat.getAttachedFace()).getType());
             }
             p.sendMessage(ChatColor.GREEN + "==============");
         }

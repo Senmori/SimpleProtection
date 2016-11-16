@@ -32,7 +32,9 @@ public class SimpleProtection extends JavaPlugin {
         ProtectionManager.init(config);
         
         getServer().getPluginManager().registerEvents(new BlockListener(config), this);
-        getServer().getPluginManager().registerEvents(new DebugListener(), this);
+        if(config.debug) {
+            getServer().getPluginManager().registerEvents(new DebugListener(), this);
+        }
         getServer().getPluginManager().registerEvents(new InventoryListener(config), this);
         getServer().getPluginManager().registerEvents(new PlayerListener(config), this);
         getServer().getPluginManager().registerEvents(new SignListener(config), this);

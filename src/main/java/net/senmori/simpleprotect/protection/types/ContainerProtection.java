@@ -1,12 +1,15 @@
 package net.senmori.simpleprotect.protection.types;
 
+import static sun.audio.AudioPlayer.player;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import net.senmori.simpleprotect.ProtectionConfig;
 import net.senmori.simpleprotect.protection.Protection;
 import net.senmori.simpleprotect.protection.ProtectionManager;
+import net.senmori.simpleprotect.util.LogHandler;
 import net.senmori.simpleprotect.util.Reference;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -62,52 +65,28 @@ public class ContainerProtection extends Protection {
             }
             return canProtect(attachedTo);
         }
+        // check chests
+        if(isChest(block)) {
+            for(BlockFace face : validFaces) {
+                if(block.getRelative(face).getType() == block.getType()) {
+                    return true;
+                }
+            }
+            return true;
+        }
         return getProtectedMaterials().contains(block.getType());
     }
     
     public boolean canDestroy(Player player, Block block) {
-        if(config.allowAdminBreak ) {
-            if(config.useLockettePerms) {
-                if(player.hasPermission(Reference.Lockette.ADMIN_BREAK)) {
-                    return true;
-                }
-            }
-            if(player.hasPermission(Reference.Permissions.ADMIN_BREAK)) {
-                return true;
-            }
-        }
-        String owner = getOwner(block);
-        return owner != null && owner.equals(player.getName());
+        return !isProtected(block) || isOwner(player, block);
     }
     
     public boolean canBuild(Player player, Block block) {
-        if(config.allowAdminBreak ) {
-            if(config.useLockettePerms) {
-                if(player.hasPermission(Reference.Lockette.ADMIN_BYPASS)) {
-                    return true;
-                }
-            }
-            if(player.hasPermission(Reference.Permissions.ADMIN_BYPASS)) {
-                return true;
-            }
-        }
-        String owner = getOwner(block);
-        return owner != null && owner.equals(player.getName());
+        return !isProtected(block) || isOwner(player, block);
     }
     
-    
     public boolean canInteract(Player player, Block block) {
-        if(config.allowAdminBypass ) {
-            if(config.useLockettePerms) {
-                if(player.hasPermission(Reference.Lockette.ADMIN_SNOOP)) {
-                    return true;
-                }
-            }
-            if(player.hasPermission(Reference.Permissions.ADMIN_SNOOP)) {
-                return true;
-            }
-        }
-        return isUser(player, block);
+        return !isProtected(block) || isUser(player, block);
     }
     
     public String getOwner(Block block) {
@@ -142,12 +121,7 @@ public class ContainerProtection extends Protection {
         return false;
     }
     
-    /**
-     * Gets the main protection sign for this block.(including double chests)
-     *
-     * @param block the block to check
-     * @return the sign, or null if not found/protected
-     */
+    // Get main protection sign
     private Sign getOwnerSign(Block block) {
         List<Sign> signs = getAttachedSigns(block);
         
@@ -191,7 +165,6 @@ public class ContainerProtection extends Protection {
         List<Sign> signs = new ArrayList<>();
         // block is a wall sign, look at what it's attached to
         if(block.getType() == Material.WALL_SIGN) {
-            signs.clear();
             Sign sign = (Sign)block.getState();
             org.bukkit.material.Sign mat = (org.bukkit.material.Sign)sign.getData();
             if(ProtectionManager.blacklistedMaterials.contains(block.getRelative(mat.getAttachedFace()).getType())) {
@@ -202,7 +175,6 @@ public class ContainerProtection extends Protection {
         }
         
         if(isChest(block)) {
-            signs.clear();
             // find all signs attached to this chest
             signs.addAll(scanForSigns(block));
             
@@ -218,7 +190,6 @@ public class ContainerProtection extends Protection {
             }
             return signs;
         }
-        signs.clear();
         // check the actual block for signs
         signs.addAll(scanForSigns(block));
         return signs;

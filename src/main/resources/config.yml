@@ -1,7 +1,5 @@
 # Allows admins to bypass protection signs
 allow-admin-bypass: true
-# Allows admins to peek into protected containers.
-allow-admin-snoop: false
 # Allows admins to break protection signs
 allow-admin-break: true
 # Protected blocks are not affected by explosions
@@ -12,5 +10,5 @@ door-protection: true
 enable-error-messages: true
 # Sends a message to players when protectable blocks are placed.
 enable-hints: true
-# Use Lockette permissions
-use-lockette-perms: true
+# Players in creative can override all permissions.
+creative-override: true

@@ -1,12 +1,13 @@
 package net.senmori.simpleprotect.protection.types;
 
+import static sun.audio.AudioPlayer.player;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import net.senmori.simpleprotect.ProtectionConfig;
 import net.senmori.simpleprotect.protection.Protection;
 import net.senmori.simpleprotect.protection.ProtectionManager;
-import net.senmori.simpleprotect.util.Reference;
+import net.senmori.simpleprotect.util.LogHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -66,20 +67,13 @@ public class DoorProtection extends Protection {
             }
             return canProtect(attachedTo);
         }
-        if(getProtectedMaterials().contains(block.getType())) {
-            return true;
-        }
-        return getProtectedMaterials().contains(block.getRelative(BlockFace.UP).getType()) || getProtectedMaterials().contains(block.getRelative(BlockFace.DOWN).getType());
+        return getProtectedMaterials().contains(block.getType())
+               || getProtectedMaterials().contains(block.getRelative(BlockFace.UP).getType())
+               || getProtectedMaterials().contains(block.getRelative(BlockFace.DOWN).getType());
     }
     
     public boolean canDestroy(Player player, Block block) {
         if(!isProtected(block)) return true;
-        if(config.allowAdminBreak ) {
-            if(config.useLockettePerms) {
-                return player.hasPermission(Reference.Lockette.ADMIN_BREAK);
-            }
-            return player.hasPermission(Reference.Permissions.ADMIN_BREAK);
-        }
         if(!getProtectedMaterials().contains(block.getType())) {
             Block down = block.getRelative(BlockFace.DOWN);
             Block above = block.getRelative(BlockFace.UP);
@@ -93,12 +87,6 @@ public class DoorProtection extends Protection {
     
     public boolean canBuild(Player player, Block block) {
         if(!isProtected(block)) return true;
-        if(config.allowAdminBypass ) {
-            if(config.useLockettePerms) {
-                return player.hasPermission(Reference.Lockette.ADMIN_BYPASS);
-            }
-            return player.hasPermission(Reference.Permissions.ADMIN_BYPASS);
-        }
         if(!getProtectedMaterials().contains(block.getType())) {
             Block down = block.getRelative(BlockFace.DOWN);
             Block above = block.getRelative(BlockFace.UP);
@@ -113,12 +101,6 @@ public class DoorProtection extends Protection {
     
     public boolean canInteract(Player player, Block block) {
         if(!isProtected(block)) return true;
-        if(config.allowAdminBypass ) {
-            if(config.useLockettePerms) {
-                return player.hasPermission(Reference.Lockette.ADMIN_SNOOP);
-            }
-            return player.hasPermission(Reference.Permissions.ADMIN_SNOOP);
-        }
         if(!getProtectedMaterials().contains(block.getType())) {
             Block down = block.getRelative(BlockFace.DOWN);
             Block above = block.getRelative(BlockFace.UP);
@@ -207,6 +189,7 @@ public class DoorProtection extends Protection {
     private List<Sign> getAttachedSigns(Block block) {
         List<Sign> signs = new ArrayList<>();
         if(block.getType() == Material.WALL_SIGN) {
+            signs.clear();
             // block is a wall sign
             Sign sign = (Sign)block.getState();
             org.bukkit.material.Sign mat = (org.bukkit.material.Sign)sign.getData();
@@ -218,6 +201,7 @@ public class DoorProtection extends Protection {
         }
         
         if(isTrapDoor(block.getType())) {
+            signs.clear();
             // block is a trap door, check it and the block it is against for signs
             TrapDoor trap = (TrapDoor)block.getState().getData();
             if( block.getRelative(trap.getAttachedFace()) != null && block.getRelative(trap.getAttachedFace()).getType() != Material.AIR
@@ -230,12 +214,14 @@ public class DoorProtection extends Protection {
         }
         
         if(isFenceGate(block.getType())) {
+            signs.clear();
             // fence gate, check around it for signs
             signs.addAll(scanForSigns(block));
             return signs;
         }
         
         if(isDoor(block.getType())) {
+            signs.clear();
             Door door = (Door)block.getState().getData();
             Block otherHalf = door.isTopHalf() ? block.getRelative(BlockFace.DOWN) : block.getRelative(BlockFace.UP);
             // now we have both halves of the door
