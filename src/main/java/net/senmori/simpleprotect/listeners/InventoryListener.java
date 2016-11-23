@@ -16,11 +16,11 @@ import org.bukkit.inventory.InventoryHolder;
 
 public class InventoryListener implements Listener {
     private ProtectionConfig config;
-    
+
     public InventoryListener(ProtectionConfig config) {
         this.config = config;
     }
-    
+
     @EventHandler
     public void onMove(InventoryMoveItemEvent e) {
         boolean sourceLocked = isInventoryLocked(e.getSource());
@@ -39,25 +39,24 @@ public class InventoryListener implements Listener {
             e.setCancelled(true);
         }
     }
-    
-    
+
     private boolean isInventoryLocked(Inventory inventory) {
         InventoryHolder holder = inventory.getHolder();
         
         if(holder instanceof DoubleChest) {
             holder = ((DoubleChest)holder).getLeftSide();
         }
-        
+
         if(holder instanceof BlockState) {
             Block block = ((BlockState)holder).getBlock();
             return ProtectionManager.isProtected(block);
         }
         return false;
     }
-    
+
     private Block getBlock(Inventory inv) {
         InventoryHolder holder = inv.getHolder();
-        
+
         if(holder instanceof DoubleChest) {
             holder = ((DoubleChest)holder).getLeftSide();
         }

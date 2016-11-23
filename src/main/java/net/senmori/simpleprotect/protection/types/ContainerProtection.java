@@ -1,19 +1,17 @@
 package net.senmori.simpleprotect.protection.types;
 
-import static sun.audio.AudioPlayer.player;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import net.senmori.simpleprotect.ProtectionConfig;
 import net.senmori.simpleprotect.protection.Protection;
 import net.senmori.simpleprotect.protection.ProtectionManager;
-import net.senmori.simpleprotect.util.LogHandler;
-import net.senmori.simpleprotect.util.Reference;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import net.senmori.simpleprotect.protection.access.AccessManager;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Chest;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
@@ -37,11 +35,11 @@ public class ContainerProtection extends Protection {
         .add(BlockFace.NORTH).add(BlockFace.EAST)
         .add(BlockFace.SOUTH).add(BlockFace.WEST)
         .build();
-    
+
     public ContainerProtection(ProtectionConfig config) {
         this.config = config;
     }
-    
+
     /**
      * Gets an immutable list of valid materials that can be protected.
      *
@@ -50,11 +48,11 @@ public class ContainerProtection extends Protection {
     public List<Material> getProtectedMaterials() {
         return validMaterials;
     }
-    
+
     public boolean isProtected(Block block) {
         return getOwnerSign(block) != null;
     }
-    
+
     public boolean canProtect(Block block) {
         if(block.getType() == Material.WALL_SIGN) {
             // check what it's attached to
@@ -74,21 +72,20 @@ public class ContainerProtection extends Protection {
             }
             return true;
         }
+        if(isShulkerBox(block)) {
+            return true;
+        }
         return getProtectedMaterials().contains(block.getType());
     }
-    
+
     public boolean canDestroy(Player player, Block block) {
         return !isProtected(block) || isOwner(player, block);
     }
-    
-    public boolean canBuild(Player player, Block block) {
-        return !isProtected(block) || isOwner(player, block);
-    }
-    
+
     public boolean canInteract(Player player, Block block) {
         return !isProtected(block) || isUser(player, block);
     }
-    
+
     public String getOwner(Block block) {
         Sign sign = getOwnerSign(block);
         if(sign != null) {
@@ -96,35 +93,28 @@ public class ContainerProtection extends Protection {
         }
         return null;
     }
-    
+
     private boolean isOwner(Player player, Block block) {
         Sign sign = getOwnerSign(block);
         return sign != null && sign.getLine(1).equals(player.getName());
     }
-    
+
     private boolean isUser(Player player, Block block) {
         if(isOwner(player, block)) return true;
-        
         List<Sign> users = getUserSigns(block);
         if(users != null && users.size() > 0) {
             for(Sign sign : users) {
-                for(String line : sign.getLines()) {
-                    if(!line.isEmpty() && line.equals(ProtectionManager.EVERYONE_KEY)) {
-                        return true;
-                    }
-                    if(!line.isEmpty() && line.equals(player.getName())) {
-                        return true;
-                    }
+                if(! AccessManager.isValidAccessIdentifier(sign)) {
+                    return true;
                 }
             }
         }
         return false;
     }
-    
+
     // Get main protection sign
     private Sign getOwnerSign(Block block) {
         List<Sign> signs = getAttachedSigns(block);
-        
         for(Sign sign : signs) {
             if(ProtectionManager.isProtectionSign(sign)) {
                 return sign;
@@ -132,7 +122,7 @@ public class ContainerProtection extends Protection {
         }
         return null;
     }
-    
+
     /**
      * Gets a list of all [More Users] signs for this block
      *
@@ -145,7 +135,7 @@ public class ContainerProtection extends Protection {
             signs.clear();
             return signs;
         }
-        
+
         List<Sign> users = new ArrayList<>();
         for(Sign sign : signs) {
             if(ProtectionManager.isExtraUserSign(sign)) {
@@ -154,7 +144,7 @@ public class ContainerProtection extends Protection {
         }
         return users;
     }
-    
+
     /*
         Will get all signs relevant to this protection.
         For Chests/Trapped Chests, it will look for another chest of the same type(double chest)
@@ -173,11 +163,11 @@ public class ContainerProtection extends Protection {
             // check the block it's attached to for signs
             return getAttachedSigns(block.getRelative(mat.getAttachedFace()));
         }
-        
+
         if(isChest(block)) {
             // find all signs attached to this chest
             signs.addAll(scanForSigns(block));
-            
+
             Block attachedTo = null;
             for(BlockFace face : validFaces) {
                 if(block.getRelative(face).getType() == block.getType()) {
@@ -194,7 +184,7 @@ public class ContainerProtection extends Protection {
         signs.addAll(scanForSigns(block));
         return signs;
     }
-    
+
     private List<Sign> scanForSigns(Block block) {
         List<Sign> signs = new ArrayList<>();
         if(block.getType() == Material.WALL_SIGN) {
@@ -209,7 +199,7 @@ public class ContainerProtection extends Protection {
                 signs.clear(); // clear signs -> not allowed to be placed on this material
                 return signs;
             }
-            
+
         }
         for(BlockFace face : validFaces) {
             if(block.getRelative(face).getType() == Material.WALL_SIGN) {
@@ -221,11 +211,36 @@ public class ContainerProtection extends Protection {
         }
         return signs;
     }
-    
+
     private boolean isChest(Block block) {
-        switch(block.getType()) {
-            case CHEST:
-            case TRAPPED_CHEST:
+        return block.getState() instanceof Chest;
+    }
+
+    public static boolean isShulkerBox(Block block) {
+        return block.getState() instanceof ShulkerBox;
+    }
+
+    public static boolean isShulkerBox(Material material) {
+        if(!material.isBlock()) {
+            return false;
+        }
+        switch(material) {
+            case WHITE_SHULKER_BOX:
+            case ORANGE_SHULKER_BOX:
+            case MAGENTA_SHULKER_BOX:
+            case LIGHT_BLUE_SHULKER_BOX:
+            case YELLOW_SHULKER_BOX:
+            case LIME_SHULKER_BOX:
+            case PINK_SHULKER_BOX:
+            case GRAY_SHULKER_BOX:
+            case SILVER_SHULKER_BOX:
+            case CYAN_SHULKER_BOX:
+            case PURPLE_SHULKER_BOX:
+            case BLUE_SHULKER_BOX:
+            case BROWN_SHULKER_BOX:
+            case GREEN_SHULKER_BOX:
+            case RED_SHULKER_BOX:
+            case BLACK_SHULKER_BOX:
                 return true;
             default:
                 return false;

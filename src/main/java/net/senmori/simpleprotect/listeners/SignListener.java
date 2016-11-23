@@ -11,20 +11,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 
 public class SignListener implements Listener {
-    
     private ProtectionConfig config;
-    
+
     public SignListener(ProtectionConfig config) {
         this.config = config;
     }
-    
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onSignChange(SignChangeEvent e) {
         if(e.getBlock().getType() != Material.WALL_SIGN) return;
         Block block = e.getBlock();
-        
         String topLine = ChatColor.stripColor(e.getLine(0));
-        
+
         if(ProtectionManager.canCreateProtection(e.getPlayer(), block)) {
             // trying to create a [Private] sign
             if(topLine.equalsIgnoreCase(ProtectionManager.PRIVATE_KEY)) {
@@ -34,7 +32,6 @@ public class SignListener implements Listener {
                     e.setCancelled(true);
                     return;
                 }
-                
             }
             // trying to create a [More Users] sign
             if(topLine.equalsIgnoreCase(ProtectionManager.MORE_USERS_KEY)) {
@@ -44,10 +41,7 @@ public class SignListener implements Listener {
                     e.setCancelled(true);
                     return;
                 }
-                
             }
-            
-            
         }
     }
 }

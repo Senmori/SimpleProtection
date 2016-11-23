@@ -7,7 +7,6 @@ import java.util.List;
 import net.senmori.simpleprotect.ProtectionConfig;
 import net.senmori.simpleprotect.protection.Protection;
 import net.senmori.simpleprotect.protection.ProtectionManager;
-import net.senmori.simpleprotect.util.LogHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -39,11 +38,11 @@ public class DoorProtection extends Protection {
         .add(BlockFace.NORTH).add(BlockFace.EAST)
         .add(BlockFace.SOUTH).add(BlockFace.WEST)
         .build();
-    
+
     public DoorProtection(ProtectionConfig config) {
         this.config = config;
     }
-    
+
     /**
      * Gets an immutable list of valid materials that can be protected
      *
@@ -52,11 +51,11 @@ public class DoorProtection extends Protection {
     public List<Material> getProtectedMaterials() {
         return validMaterials;
     }
-    
+
     public boolean isProtected(Block block) {
         return getOwnerSign(block) != null;
     }
-    
+
     public boolean canProtect(Block block) {
         if(block.getType() == Material.WALL_SIGN) {
             // check what it's attached to
@@ -71,7 +70,7 @@ public class DoorProtection extends Protection {
                || getProtectedMaterials().contains(block.getRelative(BlockFace.UP).getType())
                || getProtectedMaterials().contains(block.getRelative(BlockFace.DOWN).getType());
     }
-    
+
     public boolean canDestroy(Player player, Block block) {
         if(!isProtected(block)) return true;
         if(!getProtectedMaterials().contains(block.getType())) {
@@ -83,22 +82,7 @@ public class DoorProtection extends Protection {
         }
         return isOwner(player, block) ;
     }
-    
-    
-    public boolean canBuild(Player player, Block block) {
-        if(!isProtected(block)) return true;
-        if(!getProtectedMaterials().contains(block.getType())) {
-            Block down = block.getRelative(BlockFace.DOWN);
-            Block above = block.getRelative(BlockFace.UP);
-            if(isOwner(player, above) || isOwner(player, down)) {
-                return true;
-            }
-        
-        }
-        return isOwner(player, block);
-    }
-    
-    
+
     public boolean canInteract(Player player, Block block) {
         if(!isProtected(block)) return true;
         if(!getProtectedMaterials().contains(block.getType())) {
@@ -107,11 +91,11 @@ public class DoorProtection extends Protection {
             if(isOwner(player, above) || isOwner(player, down)) {
                 return true;
             }
-        
+
         }
         return isUser(player, block);
     }
-    
+
     public String getOwner(Block block) {
         Sign sign = getOwnerSign(block);
         if(sign != null) {
@@ -119,18 +103,18 @@ public class DoorProtection extends Protection {
         }
         return null;
     }
-    
+
     private boolean isOwner(Player player, Block block) {
         Sign sign = getOwnerSign(block);
         return sign != null && ChatColor.stripColor(sign.getLine(1)).equals(player.getName());
     }
-    
+
     private boolean isUser(Player player, Block block) {
         if(!isProtected(block)) return true;
         if(isOwner(player, block)) return true;
-    
+
         List<Sign> users = getUserSigns(block);
-        
+
         if(users != null && users.size() > 0) {
             for(Sign sign : users) {
                 for(String line : sign.getLines()) {
@@ -146,7 +130,7 @@ public class DoorProtection extends Protection {
         }
         return false;
     }
-    
+
     /**
      * Gets the main protection sign for this door
      *
@@ -155,7 +139,7 @@ public class DoorProtection extends Protection {
      */
     private Sign getOwnerSign(Block block) {
         List<Sign> signs = getAttachedSigns(block);
-        
+
         for(Sign sign : signs) {
             if(ProtectionManager.isProtectionSign(sign)) {
                 return sign;
@@ -163,7 +147,7 @@ public class DoorProtection extends Protection {
         }
         return null;
     }
-    
+
     /**
      * Get a list of all signs that have [more users] or [everyone].
      *
@@ -173,7 +157,7 @@ public class DoorProtection extends Protection {
     private List<Sign> getUserSigns(Block block) {
         List<Sign> signs = getAttachedSigns(block);
         List<Sign> users = new ArrayList<>();
-        
+
         for(Sign sign : signs) {
             if(ProtectionManager.isExtraUserSign(sign)) {
                 users.add(sign);
@@ -181,7 +165,7 @@ public class DoorProtection extends Protection {
         }
         return users;
     }
-    
+
     /*
         Will get all signs relevant to this protection.
         For Doors it will get the blocks above and below the door
@@ -189,7 +173,6 @@ public class DoorProtection extends Protection {
     private List<Sign> getAttachedSigns(Block block) {
         List<Sign> signs = new ArrayList<>();
         if(block.getType() == Material.WALL_SIGN) {
-            signs.clear();
             // block is a wall sign
             Sign sign = (Sign)block.getState();
             org.bukkit.material.Sign mat = (org.bukkit.material.Sign)sign.getData();
@@ -199,9 +182,8 @@ public class DoorProtection extends Protection {
             // check the block it's attached to for signs
             return getAttachedSigns(block.getRelative(mat.getAttachedFace()));
         }
-        
+
         if(isTrapDoor(block.getType())) {
-            signs.clear();
             // block is a trap door, check it and the block it is against for signs
             TrapDoor trap = (TrapDoor)block.getState().getData();
             if( block.getRelative(trap.getAttachedFace()) != null && block.getRelative(trap.getAttachedFace()).getType() != Material.AIR
@@ -212,27 +194,25 @@ public class DoorProtection extends Protection {
             signs.addAll(scanForSigns(block));
             return signs;
         }
-        
+
         if(isFenceGate(block.getType())) {
-            signs.clear();
             // fence gate, check around it for signs
             signs.addAll(scanForSigns(block));
             return signs;
         }
-        
+
         if(isDoor(block.getType())) {
-            signs.clear();
             Door door = (Door)block.getState().getData();
             Block otherHalf = door.isTopHalf() ? block.getRelative(BlockFace.DOWN) : block.getRelative(BlockFace.UP);
             // now we have both halves of the door
-            
-            
+
+
             signs.addAll(scanForSigns(block));
             signs.addAll(scanForSigns(otherHalf));
             // check blocks above/below door
             Block aboveDoor = door.isTopHalf() ? block.getRelative(BlockFace.UP) : otherHalf.getRelative(BlockFace.UP);
             Block belowDoor = door.isTopHalf() ? otherHalf.getRelative(BlockFace.DOWN) : block.getRelative(BlockFace.DOWN);
-            
+
             if(aboveDoor != null && !ProtectionManager.blacklistedMaterials.contains(aboveDoor.getType())) {
                 signs.addAll(scanForSigns(aboveDoor));
             }
@@ -251,8 +231,8 @@ public class DoorProtection extends Protection {
         }
         return signs;
     }
-    
-    
+
+
     private boolean isDoor(Material type) {
         switch(type) {
             case WOODEN_DOOR:
@@ -267,7 +247,7 @@ public class DoorProtection extends Protection {
                 return false;
         }
     }
-    
+
     private boolean isTrapDoor(Material type) {
         switch(type) {
             case TRAP_DOOR:
@@ -277,7 +257,7 @@ public class DoorProtection extends Protection {
                 return false;
         }
     }
-    
+
     private boolean isFenceGate(Material type) {
         switch(type) {
             case FENCE_GATE:
@@ -291,7 +271,7 @@ public class DoorProtection extends Protection {
                 return false;
         }
     }
-    
+
     private List<Sign> scanForSigns(Block block) {
         List<Sign> signs = new ArrayList<>();
         if(block.getType() == Material.WALL_SIGN) {

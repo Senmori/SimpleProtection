@@ -7,6 +7,7 @@ import net.senmori.simpleprotect.listeners.InventoryListener;
 import net.senmori.simpleprotect.listeners.PlayerListener;
 import net.senmori.simpleprotect.listeners.SignListener;
 import net.senmori.simpleprotect.protection.ProtectionManager;
+import net.senmori.simpleprotect.protection.access.AccessManager;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +31,7 @@ public class SimpleProtection extends JavaPlugin {
         config = ProtectionConfig.init(instance);
     
         ProtectionManager.init(config);
+        AccessManager.init();
         
         getServer().getPluginManager().registerEvents(new BlockListener(config), this);
         if(config.debug) {
@@ -38,5 +40,7 @@ public class SimpleProtection extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryListener(config), this);
         getServer().getPluginManager().registerEvents(new PlayerListener(config), this);
         getServer().getPluginManager().registerEvents(new SignListener(config), this);
+    
+        
     }
 }

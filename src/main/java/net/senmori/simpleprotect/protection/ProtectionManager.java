@@ -3,15 +3,14 @@ package net.senmori.simpleprotect.protection;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
-import net.md_5.bungee.api.ChatColor;
 import net.senmori.simpleprotect.ProtectionConfig;
 import net.senmori.simpleprotect.SimpleProtection;
 import net.senmori.simpleprotect.protection.types.ContainerProtection;
 import net.senmori.simpleprotect.protection.types.DoorProtection;
-import net.senmori.simpleprotect.util.LogHandler;
 import net.senmori.simpleprotect.util.Reference;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
@@ -27,6 +26,8 @@ public final class ProtectionManager {
     
     private static final List<Protection> protections = new ArrayList<>();
     
+    public static final ImmutableList<BlockFace> validFaces = ImmutableList.<BlockFace>builder()
+            .add(BlockFace.NORTH).add(BlockFace.EAST).add(BlockFace.SOUTH).add(BlockFace.WEST).build();
     
     public static final ImmutableList<Material> blacklistedMaterials = ImmutableList.<Material>builder()
             .add(Material.LEAVES_2).add(Material.LEAVES).add(Material.TNT)
@@ -57,12 +58,6 @@ public final class ProtectionManager {
         if(block == null || block.getType() == Material.AIR) return true;
         Protection prot = getProtection(block);
         return prot != null && prot.canDestroy(player, block);
-    }
-    
-    public static boolean canBuild(Player player, Block block) {
-        if(block == null || block.getType() == Material.AIR) return true;
-        Protection prot = getProtection(block);
-        return prot != null && prot.canBuild(player, block);
     }
     
     public static boolean canInteract(Player player, Block block) {

@@ -24,15 +24,6 @@ public abstract class Protection {
     public abstract boolean canProtect(Block block);
     
     /**
-     * Gets if the player can build with this block and any nearby blocks
-     *
-     * @param player the player
-     * @param block block the player tried to place
-     * @return true if the player can place a block here
-     */
-    public abstract boolean canBuild(Player player, Block block);
-    
-    /**
      * Gets if the player can destroy this block.
      *
      * @param player the player
