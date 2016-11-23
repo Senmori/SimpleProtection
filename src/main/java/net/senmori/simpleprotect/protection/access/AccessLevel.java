@@ -37,6 +37,7 @@ public enum AccessLevel {
     }
 
     public static AccessLevel getByIdentifier(String identifier) {
+        if(identifier == null) return null;
         for(AccessLevel al : ACCESS_LEVELS) {
             if(al.identifier.equalsIgnoreCase(identifier) || al.getAlias().equalsIgnoreCase(identifier)) {
                 return al;

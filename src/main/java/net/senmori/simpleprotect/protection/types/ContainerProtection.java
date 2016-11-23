@@ -94,17 +94,17 @@ public class ContainerProtection extends Protection {
         return null;
     }
 
-    private boolean isOwner(Player player, Block block) {
+    public boolean isOwner(Player player, Block block) {
         Sign sign = getOwnerSign(block);
         return sign != null && sign.getLine(1).equals(player.getName());
     }
 
-    private boolean isUser(Player player, Block block) {
+    public boolean isUser(Player player, Block block) {
         if(isOwner(player, block)) return true;
         List<Sign> users = getUserSigns(block);
         if(users != null && users.size() > 0) {
             for(Sign sign : users) {
-                if(! AccessManager.isValidAccessIdentifier(sign)) {
+                if(!AccessManager.isValidAccessIdentifier(sign)) {
                     return true;
                 }
             }
@@ -113,7 +113,7 @@ public class ContainerProtection extends Protection {
     }
 
     // Get main protection sign
-    private Sign getOwnerSign(Block block) {
+    public Sign getOwnerSign(Block block) {
         List<Sign> signs = getAttachedSigns(block);
         for(Sign sign : signs) {
             if(ProtectionManager.isProtectionSign(sign)) {

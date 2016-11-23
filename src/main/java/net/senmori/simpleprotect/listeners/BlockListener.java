@@ -53,9 +53,11 @@ public class BlockListener implements Listener {
             for(BlockFace face : ProtectionManager.validFaces) {
                 if(e.getBlockPlaced().getRelative(face).getType() == e.getBlockPlaced().getType()) {
                     if(ProtectionManager.isProtected(e.getBlockPlaced().getRelative(face))) {
-                        e.setBuild(false);
-                        e.setCancelled(true);
-                        return;
+                        if(!ProtectionManager.canInteract(e.getPlayer(), e.getBlock())) {
+                            e.setBuild(false);
+                            e.setCancelled(true);
+                            return;
+                        }
                     }
                 }
             }

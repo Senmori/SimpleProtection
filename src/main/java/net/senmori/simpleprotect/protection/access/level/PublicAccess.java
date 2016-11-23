@@ -1,18 +1,18 @@
 package net.senmori.simpleprotect.protection.access.level;
 
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.block.Sign;
+import net.senmori.simpleprotect.protection.ProtectionManager;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class PublicAccess implements IAccessable {
 
     @Override
-    public boolean canInteract(Sign protectionSign, Player accessor) {
+    public boolean canInteract(Block block, Player accessor) {
         return true;
     }
 
     @Override
-    public boolean canDestroy(Sign protectionSign, Player destroyer) {
-        return destroyer.getName().equalsIgnoreCase(ChatColor.stripColor(protectionSign.getLine(0)));
+    public boolean canDestroy(Block block, Player destroyer) {
+        return destroyer.getName().equalsIgnoreCase(ProtectionManager.getOwnerName(block));
     }
 }

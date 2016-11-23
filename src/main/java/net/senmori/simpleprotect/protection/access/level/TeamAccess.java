@@ -1,26 +1,28 @@
 package net.senmori.simpleprotect.protection.access.level;
 
+import net.senmori.simpleprotect.protection.ProtectionManager;
 import net.senmori.simpleprotect.protection.access.AccessLevel;
 import net.senmori.simpleprotect.protection.access.AccessManager;
+import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
 public class TeamAccess implements IAccessable {
 
     @Override
-    public boolean canInteract(Sign protectionSign, Player accessor) {
-        if(!validate(protectionSign)) {
+    public boolean canInteract(Block block, Player accessor) {
+        if(!validate(block)) {
             return true;
         }
-        return accessor.getScoreboard().getEntryTeam(accessor.getName()).getName().equalsIgnoreCase(getTeam(protectionSign));
+        return accessor.getScoreboard().getEntryTeam(accessor.getName()).getName().equals(getTeam(ProtectionManager.getOwnerSign(block)));
     }
 
     @Override
-    public boolean canDestroy(Sign protectionSign, Player destroyer) {
-        if(!validate(protectionSign)) {
+    public boolean canDestroy(Block block, Player destroyer) {
+        if(!validate(block)) {
             return true;
         }
-        return destroyer.getScoreboard().getEntryTeam(destroyer.getName()).getName().equalsIgnoreCase(getTeam(protectionSign));
+        return destroyer.getScoreboard().getEntryTeam(destroyer.getName()).getName().equals(getTeam(ProtectionManager.getOwnerSign(block)));
     }
 
     private String getTeam(Sign sign) {
@@ -32,10 +34,10 @@ public class TeamAccess implements IAccessable {
         return null;
     }
 
-    private boolean validate(Sign sign) {
-        if(!AccessManager.isValidAccessIdentifier(sign)) {
+    private boolean validate(Block block) {
+        if(!AccessManager.isValidAccessIdentifier(ProtectionManager.getOwnerSign(block))) {
             return false; // invalid sign format
         }
-        return getTeam(sign) != null;
+        return getTeam(ProtectionManager.getOwnerSign(block)) != null;
     }
 }

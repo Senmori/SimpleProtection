@@ -137,7 +137,7 @@ public class DoorProtection extends Protection {
      * @param block block to check
      * @return the main protection sign if found, or null.
      */
-    private Sign getOwnerSign(Block block) {
+    public Sign getOwnerSign(Block block) {
         List<Sign> signs = getAttachedSigns(block);
 
         for(Sign sign : signs) {
@@ -219,6 +219,34 @@ public class DoorProtection extends Protection {
             if(belowDoor != null && !ProtectionManager.blacklistedMaterials.contains(belowDoor.getType())) {
                 signs.addAll(scanForSigns(belowDoor));
             }
+            // check for double door
+            // always use top-half of door to get facing
+            Block doubleDoor = door.isTopHalf() ? block.getRelative(door.getFacing().getOppositeFace()) : otherHalf.getRelative(door.getFacing().getOppositeFace());
+            if(!isDoor(doubleDoor.getType())) {
+                doubleDoor = door.isTopHalf() ? block.getRelative(door.getFacing()) : otherHalf.getRelative(door.getFacing());
+            }
+            if(isDoor(doubleDoor.getType())) {
+                door = (Door)doubleDoor.getState().getData();
+                otherHalf = door.isTopHalf() ? block.getRelative(BlockFace.DOWN) : block.getRelative(BlockFace.UP);
+                signs.addAll(scanForSigns(doubleDoor));
+                signs.addAll(scanForSigns(otherHalf));
+
+                aboveDoor = door.isTopHalf() ? block.getRelative(BlockFace.UP) :otherHalf.getRelative(BlockFace.UP);
+                belowDoor = door.isTopHalf() ? otherHalf.getRelative(BlockFace.DOWN) : block.getRelative(BlockFace.DOWN);
+
+                if(aboveDoor != null && !ProtectionManager.blacklistedMaterials.contains(aboveDoor.getType())) {
+                    signs.addAll(scanForSigns(aboveDoor));
+                    for(BlockFace face : ProtectionManager.validFaces) {
+                        if(canProtect(aboveDoor.getRelative(face).getRelative(BlockFace.DOWN))) {
+                            // this block can be protected
+
+                        }
+                    }
+                }
+                if(belowDoor != null && !ProtectionManager.blacklistedMaterials.contains(belowDoor.getType())) {
+                    signs.addAll(scanForSigns(belowDoor));
+                }
+            }
             return signs;
         }
         // block wasn't any of the valid materials, check above it
@@ -283,7 +311,7 @@ public class DoorProtection extends Protection {
             // check the block the sign is attached to for signs
             block = block.getRelative(mat.getAttachedFace());
             if(ProtectionManager.blacklistedMaterials.contains(block.getType())) {
-                signs.clear(); // clear sign -> not allowed to be placed on this material
+                signs.clear(); // clear signs -> not allowed to be placed on this material
                 return signs; // ignore signs attached to blacklisted materials
             }
         }

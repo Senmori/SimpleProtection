@@ -23,49 +23,49 @@ public final class ProtectionManager {
     public static final String EVERYONE_KEY = "[Everyone]";
     public static final String TIMER_KEY = "[Timer:%d]";
     public static final String ERROR_KEY = "[?]";
-    
+
     private static final List<Protection> protections = new ArrayList<>();
-    
+
     public static final ImmutableList<BlockFace> validFaces = ImmutableList.<BlockFace>builder()
             .add(BlockFace.NORTH).add(BlockFace.EAST).add(BlockFace.SOUTH).add(BlockFace.WEST).build();
-    
+
     public static final ImmutableList<Material> blacklistedMaterials = ImmutableList.<Material>builder()
             .add(Material.LEAVES_2).add(Material.LEAVES).add(Material.TNT)
             .add(Material.SAND).add(Material.GRAVEL)
             .add(Material.SIGN_POST).add(Material.WALL_SIGN)
             .build();
     private static ProtectionConfig config = SimpleProtection.instance.config;
-    
+
     public static void init(ProtectionConfig config) {
         ProtectionManager.config = config;
         protections.add(new ContainerProtection(config));
         protections.add(new DoorProtection(config));
     }
-    
+
     public static boolean isProtected(Block block) {
         if(block == null || block.getType() == Material.AIR) return false;
         Protection prot = getProtection(block);
         return prot != null && prot.isProtected(block);
     }
-    
+
     public static boolean canProtect(Block block) {
         if(block == null || block.getType() == Material.AIR) return false;
         Protection prot = getProtection(block);
         return prot != null && prot.canProtect(block);
     }
-    
+
     public static boolean canDestroy(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return true;
         Protection prot = getProtection(block);
         return prot != null && prot.canDestroy(player, block);
     }
-    
+
     public static boolean canInteract(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return true;
         Protection prot = getProtection(block);
         return prot != null && prot.canInteract(player, block);
     }
-    
+
     public static String getOwnerName(Block block) {
         if(block == null || block.getType() == Material.AIR) return null;
         Protection prot = getProtection(block);
@@ -74,7 +74,16 @@ public final class ProtectionManager {
         }
         return null;
     }
-    
+
+    public static Sign getOwnerSign(Block block) {
+        if(block == null || block.getType() == Material.AIR) return null;
+        Protection prot = getProtection(block);
+        if(prot != null) {
+            return prot.getOwnerSign(block);
+        }
+        return null;
+    }
+
     public static boolean canCreateProtection(Player player, Block block) {
         if(block == null || block.getType() == Material.AIR) return false;
         if(!canProtect(block)) return false;
@@ -82,13 +91,13 @@ public final class ProtectionManager {
                player.hasPermission(Reference.Permissions.ADMIN_CREATE) ||
                player.hasPermission(Reference.Permissions.ADMIN_BYPASS);
     }
-    
+
     public static boolean isProtectionSign(Sign sign) {
         if(sign.getType() != Material.WALL_SIGN) return false;
-        
+
         return sign.getLine(0).equalsIgnoreCase(PRIVATE_KEY);
     }
-    
+
     public static boolean isExtraUserSign(Sign sign) {
         if(sign.getType() != Material.WALL_SIGN) return false;
         // 0 & 1 are reserved for [Private] and owner's name
@@ -97,7 +106,7 @@ public final class ProtectionManager {
         }
         return sign.getLine(0).equalsIgnoreCase(MORE_USERS_KEY);
     }
-    
+
     private static Protection getProtection(Block block) {
         for(Protection prot : protections) {
             if(prot.canProtect(block)) {
