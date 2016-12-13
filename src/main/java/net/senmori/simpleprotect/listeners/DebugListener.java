@@ -1,13 +1,8 @@
 package net.senmori.simpleprotect.listeners;
 
-import net.senmori.simpleprotect.protection.ProtectionManager;
-import net.senmori.simpleprotect.protection.types.DoorProtection;
-import net.senmori.simpleprotect.util.LogHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,12 +22,12 @@ public class DebugListener implements Listener {
             e.setCancelled(true);
             Block block = e.getClickedBlock();
             p.sendMessage(ChatColor.GREEN + "==============");
-            p.sendMessage(ChatColor.GOLD + "Block: " + ChatColor.RESET + block.getType().toString() + ChatColor.GOLD);
-            p.sendMessage(ChatColor.GOLD + "Lockable: " + ChatColor.RESET + formatBool(ProtectionManager.canProtect(block)));
-            p.sendMessage(ChatColor.GOLD + "Locked: " + ChatColor.RESET + formatBool(ProtectionManager.isProtected(block)));
-            p.sendMessage(ChatColor.GOLD + "Owner: " + ChatColor.RESET + ProtectionManager.getOwnerName(block));
-            p.sendMessage(ChatColor.GOLD + "CanDestroy: " + ChatColor.RESET + formatBool(ProtectionManager.canDestroy(p, block)));
-            p.sendMessage(ChatColor.GOLD + "CanInteract: " + ChatColor.RESET + formatBool(ProtectionManager.canInteract(p, block)));
+            //p.sendMessage(ChatColor.GOLD + "Block: " + ChatColor.RESET + block.getType().toString() + ChatColor.GOLD);
+            //p.sendMessage(ChatColor.GOLD + "Lockable: " + ChatColor.RESET + formatBool(ProtectionManager.canProtect(block)));
+            //p.sendMessage(ChatColor.GOLD + "Locked: " + ChatColor.RESET + formatBool(ProtectionManager.isProtected(block)));
+            //p.sendMessage(ChatColor.GOLD + "Owner: " + ChatColor.RESET + ProtectionManager.getOwnerName(block));
+            //p.sendMessage(ChatColor.GOLD + "CanDestroy: " + ChatColor.RESET + formatBool(ProtectionManager.canDestroy(p, block)));
+            //p.sendMessage(ChatColor.GOLD + "CanInteract: " + ChatColor.RESET + formatBool(ProtectionManager.canInteract(p, block)));
             if(block.getType() == Material.WALL_SIGN) {
                 Sign signBlock = (Sign) block.getState();
                 org.bukkit.material.Sign mat = (org.bukkit.material.Sign) signBlock.getData();
