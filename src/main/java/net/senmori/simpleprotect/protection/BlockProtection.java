@@ -14,7 +14,23 @@ public class BlockProtection extends Protection {
 
     public BlockProtection(ProtectionType type) {
         super(type);
-        validBlocks.add(null);
+        validBlocks.add(Material.CHEST);
+        validBlocks.add(Material.TRAPPED_CHEST);
+        validBlocks.add(Material.DISPENSER);
+        validBlocks.add(Material.DROPPER);
+        validBlocks.add(Material.HOPPER);
+        validBlocks.add(Material.BEACON);
+        validBlocks.add(Material.BED);
+        validBlocks.add(Material.BREWING_STAND);
+        validBlocks.add(Material.BURNING_FURNACE);
+        validBlocks.add(Material.ENDER_CHEST);
+        validBlocks.add(Material.ENCHANTMENT_TABLE);
+        validBlocks.add(Material.FENCE_GATE);
+        validBlocks.add(Material.SPRUCE_FENCE_GATE);
+        validBlocks.add(Material.ACACIA_FENCE_GATE);
+        validBlocks.add(Material.BIRCH_FENCE_GATE);
+        validBlocks.add(Material.DARK_OAK_FENCE_GATE);
+        validBlocks.add(Material.JUNGLE_FENCE_GATE);
     }
 
     @Override
@@ -24,7 +40,7 @@ public class BlockProtection extends Protection {
 
     @Override
     public boolean canProtect(Location loc) {
-        return false;
+        return isShulker(loc.getBlock().getType()) || validBlocks.contains(loc.getBlock().getType());
     }
 
     @Override
