@@ -3,31 +3,3 @@ version: ${project.version}
 description: ${project.description}
 author: ${author}
 main: ${main.Class}
-commands:
-permissions:
-  simpleprotect.*:
-    description: Permission to do anything.
-    children:
-      simpleprotect.user: true
-      simpleprotect.admin: true
-      simpleprotect.admin.snoop: true
-  simpleprotect.user:
-    default: true
-    description: All the permissions a normal user should need.
-    children:
-      simpleprotect.user.create: true
-  simpleprotect.user.create:
-    default: true
-    description: Allows the creation of protection signs
-  simpleprotect.admin:
-    description: All the permissions an admin should need.
-    children:
-      simpleprotect.user: true
-      simpleprotect.admin.bypass: true
-      simpleprotect.admin.break: true
-  simpleprotect.admin.break:
-    default: op
-  simpleprotect.admin.bypass:
-    default: op
-  simpleprotect.admin.snoop:
-    default: op
